@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather App</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -20,12 +21,14 @@
           <input type="submit" class="submit-form" id="submit" />
         </form>
       </header>
-      <h1 id="city-element">Location</h1>
+      <h1 id="city-element"></h1>
       <div class="current-details">
         <div class="current-date">Thursday 10th January</div>
         <span class="time">Time</span>
         <div class="location-details">
-          The weather in Location is 10 degrees
+          The weather in <span id="current-location"></span> is
+          <span id="current-temp"></span>
+          degrees
         </div>
         <hr />
         <div class="weekly- forecast">This weeks Forecast</div>
