@@ -30,7 +30,10 @@ function updateWeather(response) {
   let currentDate = document.querySelector("#current-date");
   time.innerHTML = formatTime(date);
   currentDate.innerHTML = formatDate(date);
+  let icon = document.querySelector("#icon");
+  icon.innerHTML = `<img src="${response.data.condition.icon_url}"/>`;
 }
+
 function formatTime(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
