@@ -23,13 +23,16 @@
       </header>
       <h1 id="city-element"></h1>
       <div class="current-details">
-        <div class="current-date">Thursday 10th January</div>
-        <span class="time">Time</span>
+        <div class="current-date" id="current-date">Thursday 10th January</div>
+        <span class="time" id="time"></span>
         <div class="location-details">
-          The weather in <span id="current-location"></span> is
+          The weather in
+          <span id="current-location" class="current-location"></span> is
           <span id="current-temp"></span>
           degrees
         </div>
+        <div>Humidity:<span class="humidity" id="humidity"></span></div>
+        <div>Wind: <span class="wind" id="wind"></span></div>
         <hr />
         <div class="weekly- forecast">This weeks Forecast</div>
       </div>

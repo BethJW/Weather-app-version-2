@@ -15,13 +15,57 @@ function searchCity(city) {
 function updateWeather(response) {
   let currentTemp = document.querySelector("#current-temp");
   let temperature = response.data.temperature.current;
-  currentTemp.innerHTML = Math.round(temperature);
+  let humidity = document.querySelector("#humidity");
   let city = document.querySelector("#city-element");
-  city.innerHTML = response.data.city;
   let currentCity = document.querySelector("#current-location");
-  currentCity.innerHTML = response.data.city;
+  let windSpeed = document.querySelector("#wind");
+  let time = document.querySelector("#time");
+  let date = new Date(response.data.time * 1000);
+  currentTemp.innerHTML = Math.round(temperature);
   city.innerHTML = response.data.city;
   currentCity.innerHTML = response.data.city;
+  city.innerHTML = response.data.city;
+  humidity.innerHTML = ` ${response.data.temperature.humidity}%`;
+  windSpeed.innerHTML = `${response.data.wind.speed}km/h`;
+  let currentDate = document.querySelector("#current-date");
+  time.innerHTML = formatTime(date);
+  currentDate.innerHTML = formatDate(date);
+}
+function formatTime(date) {
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+
+  return `${hours}:${minutes}`;
+}
+function formatDate(date) {
+  let day = date.getDate();
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let writtenDay = days[date.getDay()];
+  let months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "November",
+    "Decemeber",
+  ];
+  let month = months[date.getMonth()];
+  return `${writtenDay} ${day} ${month}`;
 }
 form.addEventListener("submit", submitButton);
 searchCity("Crewe");
