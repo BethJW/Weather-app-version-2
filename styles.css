@@ -59,3 +59,14 @@ header {
   font-size: 10px;
   padding: 10px 20px;
 }
+.weekly-forecast {
+  display: flex;
+  justify-content: space-around;
+}
+.forecast-icon {
+  font-size: 50px;
+  text-align: center;
+}
+.forecast-day {
+  font-weight: bold;
+}

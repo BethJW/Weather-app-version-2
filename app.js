@@ -70,5 +70,25 @@ function formatDate(date) {
   let month = months[date.getMonth()];
   return `${writtenDay} ${day} ${month}`;
 }
+
+function updateForecast() {
+  let weeklyForecast = document.querySelector("#forecast");
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
+  let forecastHTML = "";
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="forecast">
+    <div class="forecast-icon">☀️</div>
+    <div class="forecast-day">${day}</div>
+    <div class="forecast-temp">19</div>
+  </div>
+`;
+  });
+
+  weeklyForecast.innerHTML = forecastHTML;
+}
+
 form.addEventListener("submit", submitButton);
 searchCity("Crewe");
+updateForecast();
