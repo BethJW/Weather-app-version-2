@@ -32,7 +32,7 @@ function updateWeather(response) {
   currentDate.innerHTML = formatDate(date);
   let icon = document.querySelector("#icon");
   icon.innerHTML = `<img src="${response.data.condition.icon_url}"/>`;
-  updateForecast(response.data.city);
+  getForecast(response.data.city);
 }
 
 function formatTime(date) {
@@ -74,17 +74,18 @@ function formatDate(date) {
 
 function updateForecast(response) {
   let weeklyForecast = document.querySelector("#forecast");
-  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
   let forecastHTML = "";
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="forecast">
-    <div class="forecast-icon">☀️</div>
-    <div class="forecast-day">${day}</div>
-    <div class="forecast-temp">19</div>
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="forecast">
+    <div class="forecast-icon"><img src = "${day.condition.icon_url}" /></div>
+    <div class="forecast-day">${formatDay(day.time)}</div>
+    <div class="forecast-temp">${Math.round(day.temperature.minimum)}℃</div>
   </div>
 `;
+    }
   });
 
   weeklyForecast.innerHTML = forecastHTML;
@@ -92,8 +93,22 @@ function updateForecast(response) {
 
 function getForecast(city) {
   let apiKey = "b9b10f3af19o1ba6ec0aed0664cb453t";
-  let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  let url = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
   axios.get(url).then(updateForecast);
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[date.getDay()];
 }
 form.addEventListener("submit", submitButton);
 searchCity("Crewe");
