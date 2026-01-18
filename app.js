@@ -32,6 +32,7 @@ function updateWeather(response) {
   currentDate.innerHTML = formatDate(date);
   let icon = document.querySelector("#icon");
   icon.innerHTML = `<img src="${response.data.condition.icon_url}"/>`;
+  updateForecast(response.data.city);
 }
 
 function formatTime(date) {
@@ -71,7 +72,7 @@ function formatDate(date) {
   return `${writtenDay} ${day} ${month}`;
 }
 
-function updateForecast() {
+function updateForecast(response) {
   let weeklyForecast = document.querySelector("#forecast");
   let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"];
   let forecastHTML = "";
@@ -89,6 +90,10 @@ function updateForecast() {
   weeklyForecast.innerHTML = forecastHTML;
 }
 
+function getForecast(city) {
+  let apiKey = "b9b10f3af19o1ba6ec0aed0664cb453t";
+  let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(url).then(updateForecast);
+}
 form.addEventListener("submit", submitButton);
 searchCity("Crewe");
-updateForecast();
